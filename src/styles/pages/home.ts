@@ -7,14 +7,17 @@ export const HomeContainer = styled('div', {
 
 export const AddTaskForm = styled('form', {
   display: 'flex',
-  marginTop: '-2.84rem',
+  marginTop: '-2rem',
   justifyContent: 'center',
-  alignItems: 'center',
+  alignItems: 'stretch',
   gap: '0.3rem',
 
   input: {
     flex: 1,
+    display: 'flex',
+    alignItems: 'stretch',
     background: '$gray500',
+    color: '$gray100',
     border: '1px solid $gray700',
     padding: '1rem',
     fontSize: '1rem',
@@ -24,7 +27,6 @@ export const AddTaskForm = styled('form', {
   button: {
     maxWidth: '5.625rem',
     border: 0,
-    height: '100%',
     display: 'flex',
     alignItems: 'center',
     fontSize: '0.875rem',
