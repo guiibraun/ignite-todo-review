@@ -1,5 +1,6 @@
 import { PlusCircle } from 'phosphor-react'
 import { Header } from './components/Header'
+import { TaskArea } from './components/TaskArea'
 import { globalStyles } from './styles/globals'
 import { AddTaskForm, HomeContainer } from './styles/pages/home'
 
@@ -16,6 +17,7 @@ export function App() {
             Criar <PlusCircle size={16} />
           </button>
         </AddTaskForm>
+        <TaskArea />
       </HomeContainer>
     </>
   )
