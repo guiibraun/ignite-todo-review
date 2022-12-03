@@ -1,6 +1,7 @@
-import { createContext, ReactNode, useState } from 'react'
+import { createContext, ReactNode } from 'react'
 import { v4 as uuid } from 'uuid'
 import { Task } from '../components/TaskArea'
+import useLocalStorage from '../hooks/useLocalStorage'
 
 interface TaskContextProviderProps {
   children: ReactNode
@@ -38,11 +39,10 @@ const taskList = [
 export const TaskContext = createContext({} as TaskContextProps)
 
 export function TaskContextProvider({ children }: TaskContextProviderProps) {
-  const [tasks, setTasks] = useState<Task[]>(taskList)
+  const [tasks, setTasks] = useLocalStorage('@ignite-todo:1.0.0', taskList)
 
   function addTaskInList(newTask: Task) {
-    console.log(newTask)
-    setTasks((prevState) => [...prevState, newTask])
+    setTasks([...tasks, newTask])
   }
 
   function changeCompletedTask(id: string) {
