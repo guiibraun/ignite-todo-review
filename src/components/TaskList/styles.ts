@@ -4,6 +4,7 @@ import { styled } from '../../styles'
 export const TaskForm = styled('form', {
   display: 'flex',
   justifyContent: 'space-between',
+  alignItems: 'center',
   gap: '1rem',
   cursor: 'pointer',
   background: '$gray500',
