@@ -7,61 +7,38 @@ import {
   TaskLabel,
 } from './styles'
 import { Check, Trash } from 'phosphor-react'
-import { useEffect, useState } from 'react'
 
 interface TaskListProps {
   task: Task
   onRemoveTask: (id: string) => void
+  onChangeCompletedTask: (id: string) => void
 }
 
 export function TaskList({
   task: { checked, id, title },
   onRemoveTask,
+  onChangeCompletedTask,
 }: TaskListProps) {
-  const [isChecked, setIsChecked] = useState(checked)
-
-  /*   const { control } = useForm({
-    defaultValues: {
-      task: isChecked,
-    },
-  }) */
-
   function handleCheckChange() {
-    setIsChecked((prevState) => !prevState)
+    onChangeCompletedTask(id)
   }
 
   function handleRemoveTask() {
     onRemoveTask(id)
   }
 
-  useEffect(() => {
-    console.log(isChecked)
-  }, [isChecked])
-
   return (
     <TaskForm>
-      {/*       <Controller
-        control={control}
-        name="task"
-        render={({ field }) => {
-          return (
-
-          )
-        }}
-      /> */}
-
       <div>
         <CheckboxRoot
           onCheckedChange={handleCheckChange}
-          defaultChecked={isChecked}
+          defaultChecked={checked}
         >
           <CheckboxIndicator asChild>
             <Check />
           </CheckboxIndicator>
         </CheckboxRoot>
-        <TaskLabel check={isChecked ? 'isChecked' : undefined}>
-          {title}
-        </TaskLabel>
+        <TaskLabel check={checked ? 'isChecked' : undefined}>{title}</TaskLabel>
       </div>
 
       <DeleteCommentButton

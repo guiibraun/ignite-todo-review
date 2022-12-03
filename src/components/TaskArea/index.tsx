@@ -36,6 +36,16 @@ export function TaskArea() {
     },
   ])
 
+  function changeCompletedTask(id: string) {
+    const tasksChangedStatus = tasks.map((task) => {
+      if (task.id === id) {
+        return { ...task, checked: !task.checked }
+      }
+      return task
+    })
+    setTasks(tasksChangedStatus)
+  }
+
   const completedTasks = tasks.reduce((acc, task) => {
     if (task.checked) {
       return acc + 1
@@ -66,7 +76,12 @@ export function TaskArea() {
           <TaskAreaContainer>
             {tasks.map((task) => {
               return (
-                <TaskList key={task.id} task={task} onRemoveTask={removeTask} />
+                <TaskList
+                  key={task.id}
+                  task={task}
+                  onRemoveTask={removeTask}
+                  onChangeCompletedTask={changeCompletedTask}
+                />
               )
             })}
           </TaskAreaContainer>
