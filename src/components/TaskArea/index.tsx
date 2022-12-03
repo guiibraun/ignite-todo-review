@@ -1,5 +1,5 @@
-import { useState } from 'react'
-import { v4 as uuid } from 'uuid'
+import { useContext } from 'react'
+import { TaskContext } from '../../contexts/taskContext'
 import { TaskList } from '../TaskList'
 import {
   TaskAreaContainer,
@@ -15,48 +15,7 @@ export interface Task {
 }
 
 export function TaskArea() {
-  const [tasks, setTasks] = useState<Task[]>([
-    {
-      id: uuid(),
-      title:
-        'Integer urna interdum massa libero auctor neque turpis turpis semper. Duis vel sed fames integer.',
-      checked: true,
-    },
-    {
-      id: uuid(),
-      title:
-        'Ex cillum do pariatur ullamco culpa nulla reprehenderit deserunt cupidatat reprehenderit eu est., checked: false',
-      checked: false,
-    },
-    {
-      id: uuid(),
-      title:
-        'Aliqua voluptate cillum aliquip est ipsum deserunt pariatur ad proident ut.',
-      checked: true,
-    },
-  ])
-
-  function changeCompletedTask(id: string) {
-    const tasksChangedStatus = tasks.map((task) => {
-      if (task.id === id) {
-        return { ...task, checked: !task.checked }
-      }
-      return task
-    })
-    setTasks(tasksChangedStatus)
-  }
-
-  const completedTasks = tasks.reduce((acc, task) => {
-    if (task.checked) {
-      return acc + 1
-    }
-    return acc
-  }, 0)
-
-  function removeTask(id: string) {
-    const taskListWithoutRemovedTask = tasks.filter((task) => task.id !== id)
-    setTasks(taskListWithoutRemovedTask)
-  }
+  const { tasks, completedTasks } = useContext(TaskContext)
 
   return (
     <TaskContainer>
@@ -75,14 +34,7 @@ export function TaskArea() {
           </TaskCreatedAndCompleted>
           <TaskAreaContainer>
             {tasks.map((task) => {
-              return (
-                <TaskList
-                  key={task.id}
-                  task={task}
-                  onRemoveTask={removeTask}
-                  onChangeCompletedTask={changeCompletedTask}
-                />
-              )
+              return <TaskList key={task.id} task={task} />
             })}
           </TaskAreaContainer>
         </>

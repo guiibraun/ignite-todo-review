@@ -1,24 +1,20 @@
-import { PlusCircle } from 'phosphor-react'
 import { Header } from './components/Header'
 import { TaskArea } from './components/TaskArea'
+import { TaskInput } from './components/TaskInput'
+import { TaskContextProvider } from './contexts/taskContext'
 import { globalStyles } from './styles/globals'
-import { AddTaskForm, HomeContainer } from './styles/pages/home'
+import { HomeContainer } from './styles/pages/home'
 
 globalStyles()
 
 export function App() {
   return (
-    <>
+    <TaskContextProvider>
       <Header />
       <HomeContainer>
-        <AddTaskForm>
-          <input type="text" placeholder="Adicione uma nova tarefa" />
-          <button>
-            Criar <PlusCircle size={16} />
-          </button>
-        </AddTaskForm>
+        <TaskInput />
         <TaskArea />
       </HomeContainer>
-    </>
+    </TaskContextProvider>
   )
 }

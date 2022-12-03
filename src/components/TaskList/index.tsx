@@ -7,24 +7,22 @@ import {
   TaskLabel,
 } from './styles'
 import { Check, Trash } from 'phosphor-react'
+import { useContext } from 'react'
+import { TaskContext } from '../../contexts/taskContext'
 
 interface TaskListProps {
   task: Task
-  onRemoveTask: (id: string) => void
-  onChangeCompletedTask: (id: string) => void
 }
 
-export function TaskList({
-  task: { checked, id, title },
-  onRemoveTask,
-  onChangeCompletedTask,
-}: TaskListProps) {
+export function TaskList({ task: { checked, id, title } }: TaskListProps) {
+  const { changeCompletedTask, removeTask } = useContext(TaskContext)
+
   function handleCheckChange() {
-    onChangeCompletedTask(id)
+    changeCompletedTask(id)
   }
 
   function handleRemoveTask() {
-    onRemoveTask(id)
+    removeTask(id)
   }
 
   return (
